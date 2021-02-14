@@ -1,0 +1,39 @@
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/blogt', function(req, res) {
+  const blog = new Blog({
+    title: 'new blog 2',
+    snippet: 'about my new blog',
+    body: 'more about my new blog'
+  });
+
+
+  blog.save() //serve per salvare il modello nel database
+  .then((result) => {
+    res.send(result)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
+// Per ottenere tutti i file
+app.get('/blog-all', function(req, res) {
+  Blog.find() //serve per trovare i file e mostrarli in pagina
+  .then((result) => {
+    res.send(result); 
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
+// Per ottenere tutti i file
+app.get('/single-blog', function(req, res) {
+  Blog.findById('601bcbd2a31a9b31902133fd') //serve per trovare un determinato file e mostrarli in pagina
+  .then((result) => {
+    res.send(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
